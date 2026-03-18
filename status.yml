@@ -2,6 +2,10 @@
   hosts: switches
   gather_facts: no
   connection: network_cli
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: cisco.ios.ios
+    ansible_port: 23
   tasks:
     - name: Run show interface status
       cisco.ios.ios_command:
@@ -9,6 +13,6 @@
           - show interface status
       register: interface_status
 
-    - name: Print output        # ← 이거 추가
+    - name: Print output
       debug:
         var: interface_status.stdout_lines
