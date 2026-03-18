@@ -9,8 +9,6 @@
           - show interface status
       register: interface_status
 
-    - name: Save output to file
-      copy:
-        content: "{{ interface_status.stdout[0] }}"
-        dest: "/tmp/{{ inventory_hostname }}_interface_status.txt"
-      delegate_to: localhost
+    - name: Print output        # ← 이거 추가
+      debug:
+        var: interface_status.stdout_lines
