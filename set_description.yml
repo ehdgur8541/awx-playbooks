@@ -1,0 +1,19 @@
+- name: Set interface description on Catalyst
+  hosts: switches
+  gather_facts: no
+  tasks:
+    - name: Set description on Gi1/0/1
+      cisco.ios.ios_config:
+        lines:
+          - description test
+        parents: interface GigabitEthernet1/0/1
+
+    - name: Verify description
+      cisco.ios.ios_command:
+        commands:
+          - show interface GigabitEthernet1/0/1 description
+      register: result
+
+    - name: Print result
+      debug:
+        var: result.stdout_lines
