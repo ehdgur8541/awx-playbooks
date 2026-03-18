@@ -1,0 +1,16 @@
+- name: Show interface status on Catalyst
+  hosts: switches
+  gather_facts: no
+  connection: network_cli
+  tasks:
+    - name: Run show interface status
+      cisco.ios.ios_command:
+        commands:
+          - show interface status
+      register: interface_status
+
+    - name: Save output to file
+      copy:
+        content: "{{ interface_status.stdout[0] }}"
+        dest: "/tmp/{{ inventory_hostname }}_interface_status.txt"
+      delegate_to: localhost
