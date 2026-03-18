@@ -1,11 +1,7 @@
 - name: Show interface status on Catalyst
   hosts: switches
   gather_facts: no
-  connection: network_cli
-  vars:
-    ansible_connection: network_cli
-    ansible_network_os: cisco.ios.ios
-    ansible_port: 23
+  connection: ansible.netcommon.telnet
   tasks:
     - name: Run show interface status
       cisco.ios.ios_command:
