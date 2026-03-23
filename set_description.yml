@@ -1,5 +1,5 @@
 - name: Set interface description on Catalyst
-  hosts: switches
+  hosts: all
   gather_facts: no
   tasks:
     - name: Set description on Gi1/0/1
